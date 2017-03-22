@@ -3,6 +3,11 @@
 var path = process.cwd();
 
 module.exports = function(app, passport) {
+	var authRedirect = {
+		successRedirect: '/tbd',
+		failureRedirect: '/'
+	};
+
 	// Check if user is already logged in
 	function loggedIn(req, res, next) {
 	    if (req.user) {
@@ -12,12 +17,6 @@ module.exports = function(app, passport) {
 	    }
 	}
 
-	function auth(strat) {
-		passport.authenticate(strat, {
-			successRedirect: '/tbd',
-			failureRedirect: '/'
-		});
-	}
 	// Leave the call to loggedIn - authenticated users will go straight to the content!
 	app.route('/')
 		.get(loggedIn, (req, res) => {
@@ -31,14 +30,14 @@ module.exports = function(app, passport) {
 
 
 // Auth routes
-	app.get('/auth/facebook', (req, res) => {
-			passport.authenticate('facebook');
-		});
-	app.get('auth/facebook/callback', (req, res) => {
-			passport.authenticate('facebook', {failureRedirect: '/'}),
-			function onSuccess(req, res) {
-				res.redirect('/tbd');
-			}
+	app.get('/auth/facebook', 
+		passport.authenticate('facebook'));
+	
+	app.get('/auth/facebook/callback',
+		passport.authenticate('facebook', {
+			failureRedirect: '/'}),
+		function(req, res) {
+			res.redirect('/tbd');
 		});
 // End Auth routes
 

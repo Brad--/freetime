@@ -20,7 +20,7 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 app.use(session({
 	secret: 'super duper',
-	resave: false,
+	resave: true,
 	saveUninitialized: true
 }));
 
@@ -30,7 +30,7 @@ app.use(passport.session())
 // Setup express routes
 routes(app, passport);
 
-var port = "8000"
+var port = "3000"
 server.listen(port, () => {
 	console.log("Server listening on port ", port);
 });

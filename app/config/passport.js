@@ -13,14 +13,14 @@ module.exports = function(passport) {
 	passport.use(new FacebookStrategy({
 		clientID: process.env.FACEBOOK_KEY,
 		clientSecret: process.env.FACEBOOK_SECRET,
-		callbackURL: "/auth/facebook/callback"
+		callbackURL: "http://localhost:3000/auth/facebook/callback"
 	},
-	(accessToken, refreshToken, profile, cb) => {
+	(accessToken, refreshToken, profile, done) => {
 		// User.findOrCreate({ facebookId: profile.id }, 
 		// (err, user) => {
 		// 	return cb(err, user);
 		// });
-		return cb(null, profile);
+		return done(null, profile);
 	}
 	));
 }
