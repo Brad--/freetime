@@ -2,7 +2,7 @@
 ## Simple(tm) freetime scheduler
 Things to include in your .env
 
-'''
+```
 FACEBOOK_KEY=
 FACEBOOK_SECRET=
 
@@ -12,4 +12,4 @@ PGHOST=
 PGUSER=
 PGDATABASE=
 PGPASSWORD=
-'''
+```
