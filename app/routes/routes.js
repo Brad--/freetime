@@ -1,10 +1,14 @@
 'use strict';
 
+// User Navigation Routes:
+//	/: Landing Page. About us & Login
+//	/profile: Main app
+
 var path = process.cwd();
 
 module.exports = function(app, passport) {
 	var authRedirect = {
-		successRedirect: '/tbd',
+		successRedirect: '/profile',
 		failureRedirect: '/'
 	};
 
@@ -23,9 +27,9 @@ module.exports = function(app, passport) {
 			res.sendFile(path + "/public/index.html");
 		});
 
-	app.route('/tbd')
+	app.route('/profile')
 		.get(loggedIn, (req, res) => {
-			res.sendFile(path + "/public/lol.html");
+			res.sendFile(path + "/public/profile.html");
 		});
 
 
@@ -37,7 +41,7 @@ module.exports = function(app, passport) {
 		passport.authenticate('facebook', {
 			failureRedirect: '/'}),
 		function(req, res) {
-			res.redirect('/tbd');
+			res.redirect('/profile');
 		});
 // End Auth routes
 
